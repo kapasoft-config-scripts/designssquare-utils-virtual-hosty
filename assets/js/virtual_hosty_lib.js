@@ -17,10 +17,12 @@ if (!window.VIRTUAL_HOSTY) {
                         //don't have base url, lets add
                         if(final_url.indexOf(window.location.origin) == 0){
                             //full path
-                            final_url = window.location.origin + base_url + final_url.substring(window.location.origin.length);
+                            var path = base_url + '/' + final_url.substring(window.location.origin.length);
+                            final_url = window.location.origin + path.replace(/\/{2,}/g, '/');
                         }else{
                             //relative path
-                            final_url = base_url + $(this).attr('src');
+                            var path = base_url + '/' + $(this).attr('src');
+                            final_url = path.replace(/\/{2,}/g, '/');
                         }
                     }
                     if(log_on){console.log('img path ' + $(this).attr('src') + ' converted to ' + final_url)};
